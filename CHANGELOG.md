@@ -1,9 +1,9 @@
-# 1.0.2版本
+# Version 1.0.2
 
-1. 采用批量方式写入数据，提高效率
+1. Use batch writing to improve efficiency
 
-# 1.0.1版本
+# Version 1.0.1
 
-1. 优化代码中的类型声明信息
-2. 增加对Tick汇总数据的支持
-3. 增加对流式写入参数的支持
+1. Optimize type declaration information in code
+2. Add support for Tick summary data
+3. Add support for streaming write parameters

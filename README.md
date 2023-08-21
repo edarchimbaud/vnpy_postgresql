@@ -1,4 +1,4 @@
-# VeighNa框架的PostgreSQL数据库接口
+# PostgreSQL Database Interface for VeighNa Framework
 
 <p align="center">
   <img src ="https://vnpy.oss-cn-shanghai.aliyuncs.com/vnpy-logo.png"/>
@@ -10,29 +10,29 @@
     <img src ="https://img.shields.io/badge/python-3.7|3.8|3.9|3.10-blue.svg" />
 </p>
 
-## 说明
+## Description
 
-基于peewee开发的PostgreSQL数据库接口。
+Based on the PostgreSQL database interface developed by peewee.
 
-## 使用
+## Use
 
-### 全局配置
+### Global Configuration
 
-在VeighNa中使用PostgreSQL时，需要在全局配置中填写以下字段信息：
+To use PostgreSQL in VeighNa, you need to fill in the following field information in the global configuration:
 
-|名称|含义|必填|举例|
+|name|meaning|required|examples|
 |---------|----|---|---|
-|database.name|名称|是|postgresql|
-|database.host|地址|是|localhost|
-|database.port|端口|是|5432|
-|database.database|实例|是|vnpy|
-|database.user|用户名|是|postgres|
-|database.password|密码|是|123456|
+|database.name|Name|Yes|postgresql|
+|database.host|Address|Yes|localhost|
+|database.port|Port|Yes|5432|
+|database.database|Instance|Yes|vnpy|
+|database.user|Username|Yes|postgres|
+|database.password|Password|Yes|123456|
 
-请注意，VeighNa不会主动为关系型数据库创建数据库，所以请确保你所填的database.database字段对应的数据库已经创建好了。若未创建数据库，请手动连上数据库并创建。
+Please note that VeighNa does not actively create databases for relational databases, so please make sure that the database corresponding to the database.database field you filled in has been created. If no database has been created, please connect to it manually and create it.
 
-### 创建实例
+### Creating an instance
 
-VeighNa不会主动为PostgreSQL数据库创建实例，所以使用前请确保database.database字段中填写的的数据库实例已经创建了。
+VeighNa does not create instances of PostgreSQL databases on its own initiative, so please make sure that the instance of the database you filled in the database.database field has been created before using it.
 
-若实例尚未创建，可以使用【pgAdmin 4】客户端的【Create Database】进行操作。
+If an instance has not been created, you can use [Create Database] in the [pgAdmin 4] client.
