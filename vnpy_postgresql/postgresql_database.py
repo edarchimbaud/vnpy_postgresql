@@ -38,7 +38,7 @@ db: PeeweePostgresqlDatabase = PeeweePostgresqlDatabase(
 
 
 class DbBarData(Model):
-    """K-Line Data Table Mapping Objects"""
+    """Bar Data Table Mapping Objects"""
 
     id: AutoField = AutoField()
 
@@ -115,7 +115,7 @@ class DbTickData(Model):
 
 
 class DbBarOverview(Model):
-    """K-Line Summary Data Table Mapping Objects"""
+    """Bar Summary Data Table Mapping Objects"""
 
     id: AutoField = AutoField()
 
@@ -157,7 +157,7 @@ class PostgresqlDatabase(BaseDatabase):
         self.db.create_tables([DbBarData, DbTickData, DbBarOverview, DbTickOverview])
 
     def save_bar_data(self, bars: List[BarData], stream: bool = False) -> bool:
-        """Save K-Line Data"""
+        """Save Bar Data"""
         # Read the primary key parameters
         bar: BarData = bars[0]
         symbol: str = bar.symbol
@@ -198,7 +198,7 @@ class PostgresqlDatabase(BaseDatabase):
                     ),
                 ).execute()
 
-        # Updated K-line summary data
+        # Updated bar summary data
         overview: DbBarOverview = DbBarOverview.get_or_none(
             DbBarOverview.symbol == symbol,
             DbBarOverview.exchange == exchange.value,
@@ -343,7 +343,7 @@ class PostgresqlDatabase(BaseDatabase):
         start: datetime,
         end: datetime,
     ) -> List[BarData]:
-        """Read K-line data"""
+        """Read bar data"""
         s: ModelSelect = (
             DbBarData.select()
             .where(
@@ -439,7 +439,7 @@ class PostgresqlDatabase(BaseDatabase):
     def delete_bar_data(
         self, symbol: str, exchange: Exchange, interval: Interval
     ) -> int:
-        """Delete K-line data"""
+        """Delete bar data"""
         d: ModelDelete = DbBarData.delete().where(
             (DbBarData.symbol == symbol)
             & (DbBarData.exchange == exchange.value)
@@ -447,7 +447,7 @@ class PostgresqlDatabase(BaseDatabase):
         )
         count: int = d.execute()
 
-        # Delete K-line summary data
+        # Delete bar summary data
         d2: ModelDelete = DbBarOverview.delete().where(
             (DbBarOverview.symbol == symbol)
             & (DbBarOverview.exchange == exchange.value)
@@ -473,8 +473,8 @@ class PostgresqlDatabase(BaseDatabase):
         return count
 
     def get_bar_overview(self) -> List[BarOverview]:
-        """Query the K-line summary information in the database"""
-        # If there is already a K-line, but summary information is missing, perform initialization
+        """Query the bar summary information in the database"""
+        # If there is already a bar, but summary information is missing, perform initialization
         data_count: int = DbBarData.select().count()
         overview_count: int = DbBarOverview.select().count()
         if data_count and not overview_count:
@@ -498,7 +498,7 @@ class PostgresqlDatabase(BaseDatabase):
         return overviews
 
     def init_bar_overview(self) -> None:
-        """Initialize the K-line summary information in the database"""
+        """Initialize the bar summary information in the database"""
         s: ModelSelect = DbBarData.select(
             DbBarData.symbol,
             DbBarData.exchange,
